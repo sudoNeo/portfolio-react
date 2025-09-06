@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* 3D flip animation for headshot */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Ensure proper 3D perspective */
+.transform-gpu {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+
