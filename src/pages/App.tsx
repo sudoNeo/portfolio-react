@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div>
       <Header />
-      <main className="mx-auto grid max-w-6xl grid-cols-1 gap-7 px-5 py-7 md:grid-cols-[280px_1fr]">
+  <main className="mx-auto grid max-w-6xl grid-cols-1 gap-7 px-5 py-7 lg:grid-cols-[280px_1fr]">
         <Sidebar />
         <section className="content">
           <header>

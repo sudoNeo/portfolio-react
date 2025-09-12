@@ -3,8 +3,20 @@ import CircularHeadshot from './CircularHeadshot';
 
 export default function Sidebar() {
   return (
-    <aside className="sticky top-[76px] self-start">
-      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow dark:border-slate-800 dark:bg-slate-900">
+    <div
+      className={
+        [
+          // Sticky only on large screens
+          'w-full',
+          'lg:sticky lg:top-[76px] lg:self-start',
+          // Responsive flex layout
+          'flex flex-col items-center', // default mobile: vertical, centered
+          'sm:flex-row sm:items-start sm:justify-center', // small screens: side by side
+          'lg:flex-col lg:items-center', // large screens: back to vertical
+        ].join(' ')
+      }
+    >
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow dark:border-slate-800 dark:bg-slate-900 w-full max-w-xs">
         <div className="flex justify-center">
           <CircularHeadshot />
         </div>
@@ -21,7 +33,6 @@ export default function Sidebar() {
             <span className="rounded-full border border-slate-200 px-3 py-1 transition-all duration-300 ease-out hover:scale-110 hover:shadow-md dark:border-slate-700">Kernel Tuning</span>
           </div>
           <p className="mt-3 text-slate-500 dark:text-slate-400">Passionate about problem-solving and building practical solutions. Physics enthusiast, Judoka, and amateur cook.</p>
-        
           <p className="mt-2 flex flex-wrap gap-2">
             <a className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800" href="mailto:mlope589@ucr.edu">
               <EmailIcon />
@@ -39,7 +50,7 @@ export default function Sidebar() {
           </p>
         </div>
       </div>
-    </aside>
+    </div>
   );
 }
 
