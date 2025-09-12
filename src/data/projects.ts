@@ -69,9 +69,10 @@ flowchart TB
     system_off --> Slave_Task1 & Slave_Task2
     Slave_Task3 --> system_off`,
     sections: [
-      { heading: 'Problem', body: 'Counter boil-off–induced pressure drift in propellant tanks as liquid fuel evaporates, requiring precise pressure regulation to maintain system stability.' },
-      { heading: 'Approach', body: 'Dual-AtMega architecture with sense/control split over SPI communication, PID servo-valve control, sensor calibration (ADC→mV→PSI), rate-limited actuation for hardware protection, and one-button safe-shutdown functionality.' },
-      { heading: 'Results', body: 'Achieved ±5 PSI tolerance at 20 PSI setpoint with deterministic 10 ms task scheduler, 10 Hz sensing & control, and 50 Hz PWM servo actuation.' },
+      { heading: 'System Architecture', body: 'Engineered dual-microcontroller architecture with master AtMega handling 10Hz ADC sensor acquisition and slave AtMega executing PID control loop, communicating over SPI protocol to maintain real-time pressure regulation within ±5 PSI tolerance across 0-1000 PSI operating range.' },
+      { heading: 'Control Implementation', body: 'Developed bare-metal PID controller with rate-limited servo actuation at 50Hz PWM frequency, implementing anti-windup and derivative kick prevention to protect mechanical components while maintaining stable pressure control during rapid boil-off transients.' },
+      { heading: 'Safety & Calibration', body: 'Implemented multi-stage sensor calibration pipeline (ADC→mV→PSI) with drift compensation, integrated one-button emergency shutdown sequence that safely vents system pressure, and built real-time LCD display showing setpoint, actual pressure, and system status for operator monitoring.' },
+      { heading: 'Performance Results', body: 'Achieved deterministic 10ms task scheduling with zero timing jitter, maintained ±5 PSI regulation accuracy during extended burn tests, and enabled consistent propellant delivery contributing to successful static fires and first-place FAR competition win.' },
     ],
   },
   {
@@ -82,9 +83,11 @@ flowchart TB
     hero: ['/assets/projects/daq/hero.png', '/assets/projects/daq/hero1.png'],
     repo: 'https://github.com/Highlander-Space-Program/DAQPY',
     sections: [
-      { heading: 'Problem', body: 'Need for safe, remote operation of hazardous test hardware during static fire tests and vehicle launches, requiring real-time monitoring and emergency shutdown capabilities.' },
-      { heading: 'Approach', body: 'End-to-end development of mission-critical control and data acquisition system with precision sensor calibration, multi-threaded Python/Qt GUI, and wireless remote control architecture.' },
-      { heading: 'Results', body: 'Successfully enabled remote operation across multiple static fire tests and vehicle launches, eliminating personnel proximity to hazardous hardware while providing real-time monitoring and emergency shutdown capabilities up to several hundred meters.' },
+      { heading: 'Hardware Integration', body: 'Researched and implemented LabJack T7 multiplexer system to address previous 10Hz sampling bottleneck, architecting solution supporting 13+ simultaneous channels (6 pressure transducers, 4 S-type load cells, 3 K/J-type thermocouples) with 100Hz data logging and 10Hz live visualization, replacing limited-channel hardware with scalable software-defined acquisition.' },
+      { heading: 'Software Development', body: 'Developed PyQt multi-platform control interface integrating actuation/igniter logic with XBee telemetry for remote operations, implementing live thrust curves and fill data visualization with InfluxDB time-series storage and binary file backup, enabling instantaneous analysis that previously required hours of post-processing and directly informed combustion chamber sizing decisions.' },
+      { heading: 'Modular Infrastructure', body: 'Designed industry-standard wire harness system with software-configurable channels and hot-swappable sensor capability, reducing sensor replacement time from hours to minutes during critical tests, while implementing comprehensive safety interlocks with automated out-of-range triggers ensuring safe pre-fill sequences and post-test site approaches.' },
+      { heading: 'Team Leadership & DevOps', body: 'Led 15+ engineer sub-team using Agile/Scrum methodology with GitLab CI/CD pipeline for automated builds and testing, maintained Kanban boards for feature tracking, and documented safety procedures enabling all system engineers to operate DAQ independently, delivering system on schedule for successful static fires, burst tests, and first-place FAR competition victory.' },
+      { heading: 'Mission Impact', body: 'Enabled remote operation eliminating personnel exposure to hazardous test conditions, supported multiple successful static fires achieving target chamber pressures, validated thrust measurements confirming 98% theoretical ISP, and provided critical data for iterative design improvements resulting in most efficient liquid engine in competition category.' },
     ],
   },
   {
@@ -94,10 +97,12 @@ flowchart TB
     image: '/assets/projects/lab/cover.png',
     hero: '/assets/projects/lab/hero.png',
     repo: 'https://github.com/sudoNeo/lockinReader',
-    sections: [
-      { heading: 'Problem', body: 'Single-threaded 1 kHz data logger causing data loss and limiting experiment throughput for critical scientific measurements.' },
-      { heading: 'Approach', body: 'Architected multi-process UDP streaming pipeline with zero-copy packet processing, auto-throttling, process-per-instrument architecture, and kernel-level network stack optimization including CPU isolation and packet steering.' },
-      { heading: 'Results', body: 'Scaled from 1 kHz to 1.25 MHz (1000x improvement), reduced packet loss from 15% to <0.1%, achieved 160 Mbps sustained throughput, and delivered production system processing 100+ GB/day with 99.9% uptime.' },
+     sections: [
+      { heading: 'Performance Scaling', body: 'Architected multi-process UDP streaming pipeline replacing single-threaded 1 kHz data logger, achieving 1.25 MHz sustained acquisition rate (1000x improvement) through zero-copy packet processing, lock-free ring buffers, and process-per-instrument isolation supporting concurrent Stanford Research Systems devices.' },
+      { heading: 'Network Optimization', body: 'Implemented adaptive auto-throttling algorithm monitoring network buffer occupancy and CPU utilization in real-time, dynamically adjusting streaming rates to maintain <0.1% packet loss (reduced from 15%) while sustaining 160 Mbps throughput by tuning socket buffer sizes and implementing custom packet batching.' },
+      { heading: 'Kernel-Level Tuning', body: 'Diagnosed softirq bottlenecks causing periodic 50ms latency spikes using ftrace and perf analysis, implemented CPU isolation via isolcpus kernel parameter, configured Transmit Packet Steering (XPS) for dedicated NIC hardware queues, and enabled Receive Flow Steering (RFS) to eliminate cross-CPU cache invalidation.' },
+      { heading: 'Reliability Engineering', body: 'Built automatic recovery mechanisms handling network disconnections and instrument power cycles, implemented circular buffer overflow protection with graceful degradation, and added comprehensive metrics collection via Prometheus for monitoring packet rates, buffer utilization, and processing latency.' },
+      { heading: 'Production Deployment', body: 'Delivered system processing 100+ GB/day of lock-in amplifier data with 99.9% uptime over 6 months, enabling researchers to increase experiment throughput by 10x while maintaining measurement precision, with deployment automated via systemd service management and real-time performance dashboards.' },
     ],
   }
 ];

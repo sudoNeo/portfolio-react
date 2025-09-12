@@ -10,7 +10,7 @@ export default function Sidebar() {
         </div>
         <div className="mt-3">
           <h3 className="m-0 text-lg font-semibold">Marlon Lopez</h3>
-          <div className="text-slate-500 dark:text-slate-400">Computer & Electrical Engineering</div>
+          <div className="text-slate-500 dark:text-slate-400">Computer Engineering</div>
           <div className="mt-2 flex flex-wrap gap-2 text-sm">
             <span className="rounded-full border border-slate-200 px-3 py-1 transition-all duration-300 ease-out hover:scale-110 hover:shadow-md dark:border-slate-700">C/C++</span>
             <span className="rounded-full border border-slate-200 px-3 py-1 transition-all duration-300 ease-out hover:scale-110 hover:shadow-md dark:border-slate-700">Python</span>
